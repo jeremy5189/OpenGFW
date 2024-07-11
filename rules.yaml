@@ -1,3 +1,24 @@
+- name: block example.com http
+  action: block
+  expr: string(http?.req?.headers?.host) endsWith "example.com"
+
+- name: block example.com https
+  action: block
+  expr: string(tls?.req?.sni) endsWith "example.com"
+
+- name: block example.com quic
+  action: block
+  expr: string(quic?.req?.sni) endsWith "example.com"
+
+- name: example.com dns poisoning
+  action: modify
+  modifier:
+    name: dns
+    args:
+      a: "0.0.0.0"
+      aaaa: "::"
+  expr: dns != nil && dns.qr && any(dns.questions, {.name endsWith "example.com"})
+
 - name: block farmal.in http
   action: block
   expr: string(http?.req?.headers?.host) endsWith "farmal.in"

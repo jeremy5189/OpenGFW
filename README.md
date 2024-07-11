@@ -2,11 +2,17 @@
 
 ## What is different in this fork?
 
+This fork is a dockerized version of the original OpenGFW project. It is intended to be used as a standalone application that can be easily deployed and tested.
+
+Its pre-configured with sample config and rules to block `farmal.in` and `example.com` on DNS/HTTP/HTTPS/QUIC.
+
 ### Running in docker
 
 ```bash
 docker-compose up
 ```
+
+If you update config or rules, you need to `docker-compose up --build`
 
 ### Use the socks5 proxy server to test
 
@@ -17,8 +23,6 @@ docker-compose up
 ### Testing with curl
 
 ```bash
-docker exec -it OpenGFW curl -k https://farmal.in
-> Error response from daemon: Container 3f0f87bca0ee80b31d96766f68c59e071f4211e4950d6ac71be6533533326051 is not running
 docker exec -it OpenGFW curl -k https://farmal.in
 > curl: (7) Failed to connect to farmal.in port 443 after 390 ms: Couldnot connect to server
 docker exec -it OpenGFW ping farmal.in
