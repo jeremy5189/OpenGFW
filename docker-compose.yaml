@@ -8,3 +8,16 @@ services:
       - NET_ADMIN
     ports:
       - "2222:22"
+      - "1080:1080"
+
+  socks5:
+    image: serjs/go-socks5-proxy
+    container_name: socks5
+    # You don't need this for socks5 proxy
+    # environment:
+      #- PROXY_USER=user
+      #- PROXY_PASSWORD=password
+    restart: unless-stopped
+    network_mode: "service:opengfw"
+    depends_on:
+      - opengfw

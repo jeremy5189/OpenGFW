@@ -1,6 +1,6 @@
 # ![OpenGFW](docs/logo.png)
 
-## Updates
+## What is different in this fork?
 
 ### Running in docker
 
@@ -8,13 +8,11 @@
 docker-compose up
 ```
 
-### Connecting to SSH server
+### Use the socks5 proxy server to test
 
-- IP: `docker exec -it OpenGFW hostname -i`
-- User: `sshuser`
-- Password: `password`
-
-Note: SSH tunnel broken...
+- Address: 127.0.0.1:1080
+- Type: Socks5
+- Username/Password is not required
 
 ### Testing with curl
 
