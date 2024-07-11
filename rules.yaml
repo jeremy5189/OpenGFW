@@ -1,0 +1,20 @@
+- name: block farmal.in http
+  action: block
+  expr: string(http?.req?.headers?.host) endsWith "farmal.in"
+
+- name: block farmal.in https
+  action: block
+  expr: string(tls?.req?.sni) endsWith "farmal.in"
+
+- name: block farmal.in quic
+  action: block
+  expr: string(quic?.req?.sni) endsWith "farmal.in"
+
+- name: farmal.in dns poisoning
+  action: modify
+  modifier:
+    name: dns
+    args:
+      a: "0.0.0.0"
+      aaaa: "::"
+  expr: dns != nil && dns.qr && any(dns.questions, {.name endsWith "farmal.in"})

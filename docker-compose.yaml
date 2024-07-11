@@ -1,0 +1,10 @@
+services:
+  opengfw:
+    container_name: OpenGFW
+    build:
+      context: .
+      dockerfile: Dockerfile
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "2222:22"

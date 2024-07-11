@@ -1,5 +1,53 @@
 # ![OpenGFW](docs/logo.png)
 
+## Updates
+
+### Running in docker
+
+```bash
+docker-compose up
+```
+
+### Connecting to SSH server
+
+- IP: `docker exec -it OpenGFW hostname -i`
+- User: `sshuser`
+- Password: `password`
+
+Note: SSH tunnel broken...
+
+### Testing with curl
+
+```bash
+docker exec -it OpenGFW curl -k https://farmal.in
+> Error response from daemon: Container 3f0f87bca0ee80b31d96766f68c59e071f4211e4950d6ac71be6533533326051 is not running
+docker exec -it OpenGFW curl -k https://farmal.in
+> curl: (7) Failed to connect to farmal.in port 443 after 390 ms: Couldnot connect to server
+docker exec -it OpenGFW ping farmal.in
+> PING farmal.in (0.0.0.0): 56 data bytes
+> 64 bytes from 127.0.0.1: seq=0 ttl=64 time=0.366 ms
+> 64 bytes from 127.0.0.1: seq=1 ttl=64 time=2.010 ms
+```
+
+OpenGFW outputs:
+
+```
+OpenGFW  | 2024-07-11T19:28:55Z	INFO	UDP stream action	{"id": 1811482821349343232, "src": "172.22.0.2:39732", "dst": "192.168.65.7:53", "action": "modify"}
+OpenGFW  | 2024-07-11T19:28:55Z	INFO	UDP stream action	{"id": 1811482821345148928, "src": "127.0.0.1:39912", "dst": "127.0.0.11:35187", "action": "modify"}
+OpenGFW  | 2024-07-11T19:28:55Z	INFO	UDP stream action	{"id": 1811482822137872384, "src": "127.0.0.11:53", "dst": "127.0.0.1:39912", "action": "modify"}
+OpenGFW  | 2024-07-11T19:28:55Z	INFO	UDP stream action	{"id": 1811482821349347328, "src": "172.22.0.2:55588", "dst": "192.168.65.7:53", "action": "modify"}
+OpenGFW  | 2024-07-11T19:28:55Z	INFO	UDP stream action	{"id": 1811482822968344576, "src": "127.0.0.11:35187", "dst": "127.0.0.1:39912", "action": "modify"}
+OpenGFW  | 2024-07-11T19:28:55Z	INFO	UDP stream action	{"id": 1811482822968344577, "src": "127.0.0.11:53", "dst": "127.0.0.1:39912", "action": "modify"}
+OpenGFW  | 2024-07-11T19:29:04Z	INFO	UDP stream action	{"id": 1811482859186159616, "src": "172.22.0.2:33093", "dst": "192.168.65.7:53", "action": "modify"}
+OpenGFW  | 2024-07-11T19:29:04Z	INFO	UDP stream action	{"id": 1811482859177783296, "src": "127.0.0.1:57126", "dst": "127.0.0.11:35187", "action": "modify"}
+OpenGFW  | 2024-07-11T19:29:04Z	INFO	UDP stream action	{"id": 1811482859198754816, "src": "127.0.0.11:53", "dst": "127.0.0.1:57126", "action": "modify"}
+OpenGFW  | 2024-07-11T19:29:04Z	INFO	UDP stream action	{"id": 1811482859186163712, "src": "172.22.0.2:53652", "dst": "192.168.65.7:53", "action": "modify"}
+OpenGFW  | 2024-07-11T19:29:04Z	INFO	UDP stream action	{"id": 1811482859202949120, "src": "127.0.0.11:35187", "dst": "127.0.0.1:57126", "action": "modify"}
+OpenGFW  | 2024-07-11T19:29:04Z	INFO	UDP stream action	{"id": 1811482859202949121, "src": "127.0.0.11:53", "dst": "127.0.0.1:57126", "action": "modify"}
+```
+
+---
+
 [![Quality check status](https://github.com/apernet/OpenGFW/actions/workflows/check.yaml/badge.svg)](https://github.com/apernet/OpenGFW/actions/workflows/check.yaml)
 [![License][1]][2]
 
