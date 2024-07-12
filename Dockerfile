@@ -8,10 +8,6 @@ RUN apk update && apk add iptables curl
 
 # Build
 RUN go mod download
-RUN export CGO_ENABLED=0
-RUN go build
-RUN export OPENGFW_LOG_LEVEL=debug
+RUN CGO_ENABLED=0 go build
 
-EXPOSE 22
-
-CMD ["/bin/sh", "-c", "./OpenGFW -c config.yaml rules.yaml"]
+CMD ["/bin/sh", "-c", "OPENGFW_LOG_LEVEL=debug ./OpenGFW -c config.yaml rules.yaml"]
